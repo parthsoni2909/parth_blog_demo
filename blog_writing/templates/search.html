@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search-{{ search_query }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+       {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      {% endif %}
+
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'searchblog' %}" method="get">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" id="q">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="row">
+                    <div class="case-item-wrap">
+
+                        {% for blogs in search_results %}
+
+                       <div class="card" style="margin:20px;">
+                       <img src="{{ blogs.author.profile.image.url }}" class="card-img-top" alt="..."style="height:55px;width:55px; border-radius:50%;margin:10px;">
+                       <h3 style="margin-top:-60px; margin-left:80px;"> {{ blogs.author }} </h3><br>
+                      <span class="category" style="margin-top:-40px;margin-left:90px;">
+				        <i class="fa fa-tags"></i>
+				        {% for tag in blogs.tags.all %}
+				        <a href="/search/?tag_q={{tag.title}}">{{ tag.title }}</a>,
+				        {% endfor %}
+	                </span>
+              <div class="card-body">
+             <h5 class="card-title">{{blogs.title}}</h5>
+              <p class="card-text">{{blogs.content |slice:":100"}}</p>
+              <a href="{% url 'blog-detail' blogs.slug %}" class="btn btn-primary">Read More</a>
+              </div>
+               <div class="card-footer">
+              <small class="text-muted">Last updated  {{blogs.timestamp|date:"j F, Y"}}</small>
+               </div>
+                </div>
+                    {% endfor %}
+
+                    </div>
+                </div>
+</body>
+</html>

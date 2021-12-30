@@ -1,0 +1,10 @@
+
+<div class="comment_form">
+    <h4>Leave your comment</h4>
+    <form action="." method="post" class="comment-form">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+
+        <input type="submit" value="Submit Comment" style="background:#1dd8df;">
+    </form>
+</div>

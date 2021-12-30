@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create-Blog</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<form method="POST" action="">
+    {% csrf_token %}
+     <div class="form-group" style="margin:20px;">
+        <label for="exampleInputEmail1">Title:</label>
+    {{form.title}}
+    </div>
+    <div class="form-group" style="margin:20px;">
+        <label for="exampleInputEmail1" >Content:</label>
+    {{form.content}}
+    </div>
+    <div class="form-group" style="margin:20px;">
+        <label for="exampleInputEmail1">Categories:</label>
+    {{form.categories}}
+    </div>
+    <div class="form-group" style="margin:20px;">
+        <label for="exampleInputEmail1">Tags:</label>
+    {{form.tags}}
+    </div>
+
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left:40px;">Publish</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        input{
+         height:30px;
+         width:300px;
+         border-radius:20px;
+         margin:30px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="content-section" style="background-color:#9e9e9e2e;width:50%;margin-left:350px;border-width:12px; border-color:white;border-width:12px; border-color:white;">
+      <div class="media" style="margin-top:70px;border-color:red;">
+        <center><img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="border-radius:50%; height:200px;width:200px;"></center>
+        <center><div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+        </center>
+      </div>
+    <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4" >Profile Info</legend>
+              <center>
+                  <div class="form-group" style="margin:20px;">
+                      <label for="exampleInputEmail1">Username:</label>
+                        {{ u_form.username }}
+                  </div>
+                  <div class="form-group" style="margin:20px;">
+                      <label for="exampleInputEmail1">First name:</label>
+                        {{ u_form.first_name }}
+                  </div>
+                  <div class="form-group" style="margin:20px;">
+                      <label for="exampleInputEmail1">Last name:</label>
+                        {{ u_form.last_name }}
+                  </div>
+                  <div class="form-group" style="margin:20px;">
+                      <label for="exampleInputEmail1">Email Id:</label>
+                        {{ u_form.email }}
+                  </div>
+                  <div class="form-group" style="margin:20px;">
+                      <label for="exampleInputEmail1">Change:</label>
+                        {{ p_form }}
+                  </div>
+                  </center>
+          </fieldset>
+          <div>
+            <a href="{% url 'change_password' %}">Change Password</a>
+          </div>
+          <div class="form-group">
+           <center> <button class="btn btn-success" type="submit" style="width:15%; height:35px;background-color:black;color:white;border-radius:50px;">Update</button></center>
+          </div>
+      </form>
+</body>
+</html>

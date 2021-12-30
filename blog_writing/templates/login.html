@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body{
+        background-image:url("{% static 'imgs/blue-mist.png' %}");
+        }
+
+        input{
+         height:30px;
+         width:300px;
+         border-radius:20px;
+
+        }
+
+
+    </style>
+
+</head>
+<body >
+<center>
+<form method="POST" style="margin-top:250px;">
+    {% csrf_token %}
+    <div class="form-group" style="margin:20px;">
+        <label for="exampleInputEmail1">Username:</label>
+    {{form.username}}
+    </div>
+     <div class="form-group" style="margin:20px;">
+         <label for="exampleInputPassword1">Password :</label>
+    {{form.password}}
+    </div>
+
+    <input type="submit" value="Login" style="height:35px; width:80px;background-color:blue;color:white;margin-top:20px;">
+</form>
+<p>Register your Account  <a href="{% url 'register' %}">Register</a></p>
+
+</center>
+</body>
+</html>
